@@ -1,0 +1,75 @@
+3.Would you consider the following to be clean code? Explain why or why not. If not, refactor the code. A: No, this code is not clean since it doesn't allow somebody just stepping up to immediately understand what it does. We can rename some of this code to improve it.
+
+FUNCTION convertTemperature(degree, tempuratureType) // Creating a new function
+IF temperatureType = "F" THEN // Check if temperatureType is equal "F" 
+SET result to (degree-32) (5/9) // Formula to convert degrees fahrenheit to celsius 
+PRINT result // Print result 
+ELSE IF temperatureType = "C" THEN // If y not equal to "F", check if equal to "C" 
+SET result to degree 1.8000 + 32.00 // Formula to convert degrees celsius to fahrenheit 
+PRINT result // Print result END IF END FUNCTION
+
+FUNCTION convertTemperature(degree, temperatureType)               // Creating a new function
+   IF temperatureType = "F" THEN               // Check if temperatureType is equal "F"
+     SET result to (degree-32) * (5/9)       // Formula to convert degrees fahrenheit to celsius
+   ELSE IF temperatureType = "C" THEN          // If temperatureType not equal to "F", check if equal to "C"
+     SET result to degree * 1.8000 + 32.00   // Formula to convert degrees celsius to fahrenheit
+  PRINT result                       // Print result
+ END IF
+END FUNCTION
+
+5. Using pseudocode, refactor the code for the following examples using the principles you have learned in this checkpoint.
+
+a. The following function prints the subtotal of a customer's transaction and receives payment accordingly.
+
+I relocated the line "CALL getPayment RETURNING amount" to not be redundant and removed the extra since this step is done no matter which payment type was used.
+
+FUNCTION checkOutCustomer(subTotal, discountRate, paymentType)
+  ASSIGN total = subTotal * discountRate + (subTotal * tax) 
+  PRINT "Your total due is: " + total
+  CALL getPayment RETURNING amount
+    IF paymentType = 'CASH' THEN
+       PRINT "Change due: " + amount - subTotal * discountRate + (subTotal * tax)
+    ELSE IF paymentType = 'CREDIT CARD' THEN
+       PRINT "Your credit card has been charged: " + total
+   END IF
+END FUNCTION
+c. The following class is a code snippet that should support the transactions a customer can perform at an ATM.
+
+Should everything be separated into separate classes? I can see the argument that this class holds the bank account info and restricts options based on that. There is no repetition, functions are sectioned off appropriately as I see it.
+
+CLASS BankAccount
+
+CLASS Balance
+ FUNCTION displayBalance
+    PRINT balance
+ END FUNCTION
+END CLASS
+
+CLASS Deposit
+ FUNCTION deposit(amount)
+    SET balance to balance + amount
+ END FUNCTION
+END CLASS
+
+CLASS Withdraw
+ FUNCTION withdraw(amount)
+     IF balance > amount THEN
+       SET balance to balance - amount
+     END FUNCTION
+END CLASS
+
+END CLASS
+
+7.
+function checkDupes(numbers){ 
+  for(var i = 0; i < numbers.length; i++){
+    for (var j = i; j < numbers.length; j++){
+      if (i != j && numbers[i] == numbers[j]){
+        return true; 
+      } 
+     } 
+    } 
+  return false; 
+} 
+
+array1 = [1,2,2,3]; checkDupes(array1)
