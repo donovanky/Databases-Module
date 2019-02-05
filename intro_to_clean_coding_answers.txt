@@ -1,22 +1,34 @@
+1.In your own words, explain what clean code is and why it is important.
+
+A: Clean code is code that is written so it may be understood by others reviewing our code. Clean code is code that employs the DRY methodology while also maintaining the Single Resposibility principle. It has minimal nesting, only as much as is ever needed (ideally 2) and also passes the squint test which checks for redundancy.
+
+2.Read this article about Toyota and their use of bad code. Although you may not yet understand all of the topics discussed, think about another commonly used object that relies on computers and explain what would happen if the code was not created to an acceptable standard.
+
+A: Subject: Alarm clock - If bad code is used on an alarm clock - it could not go off, it could not tell time, perhaps it would shut down and reset alarms and times. Realistically its pretty simple I imagine so maybe that example is poor.
+
 3.Would you consider the following to be clean code? Explain why or why not. If not, refactor the code. A: No, this code is not clean since it doesn't allow somebody just stepping up to immediately understand what it does. We can rename some of this code to improve it.
 
-FUNCTION convertTemperature(degree, tempuratureType) // Creating a new function
-IF temperatureType = "F" THEN // Check if temperatureType is equal "F" 
-SET result to (degree-32) (5/9) // Formula to convert degrees fahrenheit to celsius 
-PRINT result // Print result 
-ELSE IF temperatureType = "C" THEN // If y not equal to "F", check if equal to "C" 
-SET result to degree 1.8000 + 32.00 // Formula to convert degrees celsius to fahrenheit 
-PRINT result // Print result END IF END FUNCTION
+FUNCTION convertTemperature(degree, y) 
+// Creating a new function 
+IF temperatureType = "F" THEN 
+// Check if y is equal "F" SET result to (degree-32) (5/9) 
+// Formula to convert degrees fahrenheit to celsius PRINT result 
+// Print result ELSE IF temperatureType = "C" THEN 
+// If y not equal to "F", check if equal to "C" SET result to degree 1.8000 + 32.00 
+// Formula to convert degrees celsius to fahrenheit PRINT result 
+// Print result END IF END FUNCTION
 
-FUNCTION convertTemperature(degree, temperatureType)               // Creating a new function
-   IF temperatureType = "F" THEN               // Check if temperatureType is equal "F"
-     SET result to (degree-32) * (5/9)       // Formula to convert degrees fahrenheit to celsius
-   ELSE IF temperatureType = "C" THEN          // If temperatureType not equal to "F", check if equal to "C"
-     SET result to degree * 1.8000 + 32.00   // Formula to convert degrees celsius to fahrenheit
-  PRINT result                       // Print result
- END IF
+4. Would you consider the following to be clean code? Explain why or why not. If not, refactor the code. This code is pretty clear to me. The change I would consider making is to change calcPercent to calculatePercent for clarity but it just seems like it extends the function name without providing any value. However, my gut feeling is I am missing something here.
+
+FUNCTION calcPercent(sum, total) 
+IF NOT(total = 0) 
+THEN SET percentage to sum / total * 100 
+ELSE 
+PRINT "Sorry, cannot divide by 0" 
+END IF
+
+PRINT percentage 
 END FUNCTION
-
 5. Using pseudocode, refactor the code for the following examples using the principles you have learned in this checkpoint.
 
 a. The following function prints the subtotal of a customer's transaction and receives payment accordingly.
@@ -24,14 +36,27 @@ a. The following function prints the subtotal of a customer's transaction and re
 I relocated the line "CALL getPayment RETURNING amount" to not be redundant and removed the extra since this step is done no matter which payment type was used.
 
 FUNCTION checkOutCustomer(subTotal, discountRate, paymentType)
-  ASSIGN total = subTotal * discountRate + (subTotal * tax) 
-  PRINT "Your total due is: " + total
-  CALL getPayment RETURNING amount
-    IF paymentType = 'CASH' THEN
+   PRINT "Your total due is: " + subTotal * discountRate + (subTotal * tax)
+CALL getPayment RETURNING amount
+   IF paymentType = 'CASH' THEN
+
        PRINT "Change due: " + amount - subTotal * discountRate + (subTotal * tax)
-    ELSE IF paymentType = 'CREDIT CARD' THEN
-       PRINT "Your credit card has been charged: " + total
+   ELSE IF paymentType = 'CREDIT CARD' THEN
+       PRINT "Your credit card has been charged: " + subTotal * discountRate + (subTotal * tax)
    END IF
+END FUNCTION
+b. The following function checks out a book if there are no issues with the guest's account. I removed the uncessary nesting.
+
+FUNCTION checkoutBook(book, guest)
+ IF guest.accountActive &&  IF NOT(guest.hasOverdueBooks) && IF guest.outstandingFees = 0 THEN
+           APPEND book to guest.books
+           SET book.status to "Checked Out"
+           PRINT "Your books have been issued."
+         END IF
+     END IF
+ ELSE
+     PRINT "Unable to check out book."
+ END IF
 END FUNCTION
 c. The following class is a code snippet that should support the transactions a customer can perform at an ATM.
 
@@ -39,37 +64,69 @@ Should everything be separated into separate classes? I can see the argument tha
 
 CLASS BankAccount
 
-CLASS Balance
  FUNCTION displayBalance
     PRINT balance
  END FUNCTION
-END CLASS
 
-CLASS Deposit
  FUNCTION deposit(amount)
     SET balance to balance + amount
  END FUNCTION
-END CLASS
 
-CLASS Withdraw
  FUNCTION withdraw(amount)
      IF balance > amount THEN
        SET balance to balance - amount
-     END FUNCTION
-END CLASS
+     END
+ END FUNCTION
 
-END CLASS
+ FUNCTION creditCardOffer
+     IF NOT(customer.hasCreditCard) THEN
+         CALL offerCreditCard
+     END
+ END FUNCTION
 
-7.
-function checkDupes(numbers){ 
-  for(var i = 0; i < numbers.length; i++){
-    for (var j = i; j < numbers.length; j++){
-      if (i != j && numbers[i] == numbers[j]){
-        return true; 
-      } 
-     } 
-    } 
-  return false; 
-} 
+ FUNCTION checkStatus
+     IF NOT(customer.hasCheckingAccount) THEN
+         CALL offerCheckingAccount
+     END
+ END FUNCTION
 
-array1 = [1,2,2,3]; checkDupes(array1)
+ ....
+ ....
+ ....
+
+END
+Programming Questions You may do the following problems in any language of your choice. Use the clean code principles taught in this section while writing the code.
+
+Square Given an array of integers, find out whether the sum of the integers is a perfect square. If it is a perfect square, return the square root, otherwise return the sum. Example: [10,1,4,6,1,1,2] returns 5 because the square root of 25 is 5. [1,1] returns 2 because 2 is not a perfect square. The square root of 2 is approximately 1.414213562373095.
+
+function checkSquare(numbers){
+  var sum = 0;
+  var value = null;
+  var squareVal = null;
+
+
+  for (var i = 0; i < numbers.length; i++){
+    sum += numbers[i];
+  }
+
+  value = (sum > 0 && Math.sqrt(sum) % 1 === 0);
+  console.log(value);
+
+  if (value == true){
+    squareVal = Math.sqrt(sum);
+  }
+  if (value == false){
+    squareVal = sum;
+  }
+  console.log(squareVal);
+
+};
+Duplicate Given an array of integers, find out whether the array contains any duplicate elements. The function should return true if any value appears at least twice in the array, and false if every element is distinct.
+
+function checkDupes(numbers){ for(var i = 0; i < numbers.length; i++){ for (var j = i; j < numbers.length; j++){ if (i != j && numbers[i] == numbers[j]){ return true; } } } return false; } array1 = [1,2,2,3]; checkDupes(array1)
+
+Extra Credit
+
+Anagram An anagram is a word, phrase, or name formed by rearranging the letters of another word. For example, spar can be formed from rasp. Given two strings, stringOne and stringTwo, determine if stringOne is an anagram of stringTwo. Assume that the strings contain only lowercase letters and do not worry about case-sensitivity. Hint: Your first task will be to convert the strings to arrays.
+
+A:I will come back to this one.
