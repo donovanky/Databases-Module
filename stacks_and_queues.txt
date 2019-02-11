@@ -1,0 +1,174 @@
+What is the main difference between a stack and a queue?
+Stack works on the principle of LIFO (last in first out) whereas a queue works on the principle of FIFO (first in first out).
+
+What are the similarities between stacks and queues?
+Stacks and queues are similar because they allow access to one element at a time and they are both data structures. 
+
+Imagine you are an engineer tasked with implementing the UNDO and REDO options in a word processor such as Microsoft Word. Which data structure would you use for each option and why?
+
+REDO: For the redo, I would use a queue data structure since both the redo button and the queue would use the FIFO structure.
+UNDO: For undo, I would use the stack data structure since I would want to undo the last thing that occurred which would be under the LIFO structure. 
+Programming Questions
+You may program the following question in any language of your choice. Before you begin coding, write out a plan as to how you will solve the question.
+
+Given a string, reverse it using a stack. For example, the string "Bloc!" should be converted to "!colB".
+
+//Plan
+FUNCTION reverse (stringToReverse)
+INIT vars
+
+FOR each char in stringToReverse
+PUSH to var -> character from
+
+WHILE stack empty or undefined
+POP var to temp
+PUSH temp to reverse
+
+RETURN reverse
+
+//code
+function reverse(flipString){
+  var stack = [];
+  var reverse = [];
+
+  for(var character in flipString){
+    stack.push(flipString.charAt(character));
+  }
+  while(!stack.length == 0 || !stack == undefined){
+    temp = stack.pop();
+    reverse.push(temp);
+  }
+  return reverse;
+}
+
+console.log(reverse("Bloc!"));
+
+
+Implement the pop method of a stack using one queue. Make a FIFO data structure mirror the functionality of a LIFO data structure. Since the internal list is not the same as defined in the checkpoint, it may help to rewrite the pseudocode first.
+
+//Plan
+CREATE Queue Constructor
+  DEFINE var holder and var count
+
+FUNCTION queue(element)
+  APPEND to list
+  INCREMENT count
+END FUNCTION
+
+FUNCTION pop
+  DECREMENT count
+  SET temp to last element
+  REMOVE last element of list
+  RETURN temp
+END FUNCTION
+
+FUNCTION amount
+  RETURN count
+END FUNCTION
+
+//Code
+class Stack{
+  constructor(){
+    this.pop = function(queue){
+      var newQueue = [];
+      var itemToDelete = [];
+
+      for(var i = 0; i < queue.length; i++){
+        if(i == (queue.length - 1)){
+          itemToDelete.push(queue[i]);
+       }else{
+          newQueue.push(queue[i]);
+        }
+      }
+      return itemToDelete;
+    }
+  }
+}
+
+
+let stack = new Stack();
+
+console.log(stack.pop("Apple"));
+
+
+To delete an item, take all of the elements in the queue one at a time and put them at the end of the queue, except for the last one which should be removed and returned.
+
+Implement the enqueue and dequeue methods defined in the checkpoint inside your own Queue class.
+
+//plan
+CREATE queue function
+DEFINE var storage, lastIn, firstOut
+END
+
+CREATE enqueue function
+DEFINE var myQueue
+IF value exists:
+ASSIGN value to lastIn from storage
+INCREMENT lastIn
+PUSH value to myQueue
+RETURN myQueue
+END
+
+CREATE dequeue function
+IF lastIn minus firstOut is zero
+RETURN undefined
+ASSIGN result to firstOut from storage
+INCREMENT firstOut
+RETURN result
+END
+
+CREATE size function
+RETURN lastIn minus firstOut
+END
+
+ASSIGN var newQueue to new Queue function
+
+
+//code
+
+// Create queue
+var Queue = function() {
+    this.storage = {};
+    this.lastIn = 0;
+    this.firstOut = 0;
+}
+
+// Add value to end of queue
+Queue.prototype.enqueue = function(value) {
+    // Check to see if value is defined
+  var myQueue = [];  
+  if (value) {
+        this.storage[this.lastIn] = value;
+        this.lastIn++;
+    }
+  myQueue.push(value);
+  return myQueue
+}
+
+// Remove value from beginning of queue
+Queue.prototype.dequeue = function() {
+    // Check if queue is empty
+    if (this.lastIn - this.firstOut === 0) {
+        return undefined;
+    }
+    var result = this.storage[this.firstOut];
+    this.firstOut++;
+    return result;
+  
+}
+
+
+
+// Returns the length of the queue
+Queue.prototype.size = function() {
+    return this.lastIn - this.firstOut;
+}
+
+let newQueue = new Queue()
+
+
+console.log(newQueue.enqueue("Test"))
+console.log(newQueue.dequeue())
+
+
+
