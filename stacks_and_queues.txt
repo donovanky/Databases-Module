@@ -6,7 +6,7 @@ Stacks and queues are similar because they allow access to one element at a time
 
 Imagine you are an engineer tasked with implementing the UNDO and REDO options in a word processor such as Microsoft Word. Which data structure would you use for each option and why?
 
-REDO: For the redo, I would use a queue data structure since both the redo button and the queue would use the FIFO structure.
+REDO: For the redo, I would use a stack data structure as using a stack would allow us to pop and push into the stacks.
 UNDO: For undo, I would use the stack data structure since I would want to undo the last thing that occurred which would be under the LIFO structure. 
 Programming Questions
 You may program the following question in any language of your choice. Before you begin coding, write out a plan as to how you will solve the question.
