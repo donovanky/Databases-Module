@@ -1,0 +1,134 @@
+>What are some pros and cons of using linked lists instead of arrays?
+
+A:Pros of using LL over array -> memory can be saved, array uses more space. insertions and deletions in an array are fast. 
+Pros of using array over LL -> accessing elements within the array is fast, indexing is possible within an array. We can start from anywhere and extract what we need, there isn't a need to begin at zero and work from there like we do in a LL. 
+
+Q: I understand linked lists are able to increase in size in a way differently than linked lists. Are linked lists self updating? What about arrays, how could I store values beyond the default of what an array accepts? (is the limit 100 characters in js?)
+
+>Come up with a real world example of a linked list.
+
+A: A scavenger hunt is a real world example of a linked list. You must go from the beginning to the end, in order, and you use the clues to go from one part to the next.
+
+Programming Questions
+You may program the following questions in any language of your choice (JavaScript, Ruby, etc.).
+
+Before beginning to code, write out a plan explaining how to solve the question.
+
+The linked list push function should take a value, create a node, and add it to the end of a list. Below is pseudocode for a push function for a singly linked list. However, there is something wrong with it. Submit both an explanation of the bug and a functional implementation of the method.
+
+FUNCTION push(element)
+CREATE node
+SET node.value TO element
+SET node.next TO null  
+
+>>
+IF the head node does not exist
+ THEN SET head to node
+ELSE
+ SET current to head
+ SET current.next to node
+END IF
+END FUNCTION
+
+A: As i understand it, the head never actually changes since the current.next sets to node. The way I fixed this was by making  the portion after "set current to head" to a while loop which checks if current.next is not null, it sets the current to current.next. Then current.next is set to newNode (outside of the while loop). 
+
+Given an unsorted singly linked list, remove all duplicates from the linked list.
+Example
+Input: a -> c -> d -> d -> a
+Output: a -> c -> d
+
+Given an unsorted singly linked list, reverse it.
+Example
+Input: a -> b -> c -> d
+Output: d -> c -> b -> a
+
+The coded solutions for the programming problems can be found in the code below. 
+CODE:
+
+class Node {
+  constructor(value) {
+    this.value = value;
+    this.next = null;
+    this.count = 0;
+  }
+}
+
+class LinkedList {
+  constructor() {
+    this.head = null;
+  }
+
+  push(value) {
+    var newNode = new Node(value);
+
+    if (this.head === null){
+      this.head = newNode;
+    } else {
+      var current = this.head;
+
+      while (current.next !== null) {
+        current = current.next;
+      }
+
+      current.next = newNode;
+    }
+  }
+   
+  removeDupes() {
+    let current = this.head;
+      while(current !== null) {
+        let nextNode = current;
+        while(nextNode.next !== null) {
+          if(current.value === nextNode.next.value) {
+            nextNode.next = nextNode.next.next;          
+      } else {
+          nextNode = nextNode.next;
+    }
+  }
+   current = current.next;
+ }            
+}
+  
+  reverse(){
+    let current = this.head;
+    let previous = null;
+    
+    while(current){
+      var next = current.next;
+      current.next = previous;
+      previous = current;
+      current = next;
+    }
+    this.head = previous;
+  }
+         
+  print() {
+    var current = this.head;
+    while (current !== null) {
+      console.log(current.value);
+      current = current.next;
+    }
+  }
+}
+
+var myLL = new LinkedList();
+
+myLL.push(12);
+myLL.push(5);
+myLL.push(17);
+myLL.push(15);
+myLL.push(1);
+myLL.push(1);
+myLL.push(15);
+myLL.push(51);
+myLL.push(51);
+
+myLL.removeDupes();
+
+myLL.reverse();
+myLL.print();
+
+myLL.reverse();
+myLL.print();
+
+
