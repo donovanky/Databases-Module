@@ -1,24 +1,148 @@
-What is a binary tree and what makes it unique to other trees?
+Q:What is a binary tree and what makes it unique to other trees?
+A:A binary tree is a type of data structure. A binary tree is unique as it only has 2 nodes it may point to (left or right). 
 
-What is a heuristic?
+Q:What is a heuristic?
+A:A heuristic is a best guess. We use heuristics to solve complex prolems more quickly but increase the risk of our algorithm becoming less accurate. 
 
-What is another problem besides the shortest-path problem that requires the use of heuristics?
+Q:What is another problem besides the shortest-path problem that requires the use of heuristics?
+A: Another problem which uses heuristics could be the did you mean "xyz" that some search browsers employ. The algorithm tries to match it to a similar term (that )
 
-What is the difference between a depth-first search and a breadth-first search?
+Q:What is the difference between a depth-first search and a breadth-first search?
+A:A depth first search works to the end of the tree and searches up from there whereas a breadth first search starts at the node and exhausts all child nodes at each level before moving down. 
 
-Explain in your own words what an undirected, a-cyclic, unweighted graph is.
+Q:Explain in your own words what an undirected, a-cyclic, unweighted graph is.
+A: Lacks both a start and end node, but some of the nodes are connected, non-loop forming, oath between nodes has zero or unmeasured cost.  
 
-What kind of graph is a binary search tree?
+Q:What kind of graph is a binary search tree?
+A: A binary search tree is a directed, acyclic, and unweighted graph. We know this because the binary search tree has only a single parent node and does not form loops (since eventually a binary search tree has an end). 
 
 Programming Questions
 For the following questions, describe in words how you could solve the problem and then do so. Use the depiction of the Binary Search Tree to refer to the examples.
 
 Binary Search Tree Image
 
-Given a Binary Search Tree and a value, write a function that checks to see whether the value exists within the tree.
+Q:Given a Binary Search Tree and a value, write a function that checks to see whether the value exists within the tree.
+A:Create function which accepts two arguments, node to search and the target to search for. Check if node exists - if it does not, return "Does not exist". If it does exist, {check if smaller - if smaller is true, then move further left. If larger, move to right}. Do this part recursively. Ha. If node to find is equal to a node in node to search, return value exists in node. If node ends, and all nodes within node to search have been exhausted, return value does not exist.
+
+function searchBinary(number, node){
+    var current = this.root
+    if (current === null){
+      return false;
+    } else{
+        while (current.number !== number){
+          if(number < current.number){
+          current = current.left;
+        } else{
+            current = current.right;
+        }
+       }
+      return current;
+    }
+}
+
+
+
 
 Example: The value 10 exists in the tree. The value 23 does not exist in the tree.
 
-Given a Binary Search Tree and two nodes, n1 and n2, write a function that finds the distance between the two nodes.
+Q:Given a Binary Search Tree and two nodes, n1 and n2, write a function that finds the distance between the two nodes.
+
+
+class Node{
+  constructor(data){
+    this.data = data;
+    this.left = null;
+    this.right = null;
+  }
+}
+
+class BinarySearchTree{
+  constructor(){
+    this.root = null;
+  }
+
+	findDistanceBetweenTwoNodes(root, n1, n2) {
+		var lowestCommonAncestor = this.findCommonAncestor(root, n1, n2);
+		var distanceNode1ToRoot = this.countAncestors(lowestCommonAncestor, n1);
+		var distanceNode2ToRoot = this.countAncestors(lowestCommonAncestor, n2);
+		var distanceRootToAncestor = this.countAncestors(root, lowestCommonAncestor);
+		var totalDistance = (distanceNode1ToRoot + distanceNode2ToRoot) - (2 * distanceRootToAncestor);
+		return ('The distance between node ' + n1 + ' and node ' + n2 + ' is ' + totalDistance);
+	}
+
+findCommonAncestor(root, n1, n2) {
+		if (!root) return;
+		var lowestCommonAncestor = root.data;
+		if (n1 === lowestCommonAncestor || n2 === lowestCommonAncestor) {
+			return lowestCommonAncestor;
+		}
+		if (n1 < lowestCommonAncestor && n2 < lowestCommonAncestor) {
+			return this.findCommonAncestor(root.left, n1, n2);
+		}
+		if (n1 > lowestCommonAncestor && n2 > lowestCommonAncestor) {
+			return this.findCommonAncestor(root.right, n1, n2);
+		}
+		return lowestCommonAncestor;
+	}
+
+countAncestors(root, data) {
+		let thisNode = this.root;
+		let nodeCount = 0;
+		while (thisNode) {
+			if (data === thisNode.data) {
+				return nodeCount;
+			}
+			thisNode = data < thisNode.data ? thisNode.left : thisNode.right;
+			nodeCount++;
+		}
+	}
+getRootNode(){
+  return this.root;
+}
+
+insert(data){
+  var newNode = new Node(data);
+    if (this.root === null){
+      this.root = newNode;
+      this.length++;
+    } else {
+      this.insertNode(this.root, newNode);
+    }
+  }
+
+
+insertNode(node, newNode) {
+		if (newNode.data < node.data) {
+			if (node.left === null) {
+				node.left = newNode;
+				this.length++;
+			} else {
+				this.insertNode(node.left, newNode);
+			}
+		} else {
+			if (node.right === null) {
+				node.right = newNode;
+				this.length++;
+			} else {
+				this.insertNode(node.right, newNode);
+			}
+		}
+	}
+}
+var BST = new BinarySearchTree();
+
+BST.insert(10);
+BST.insert(5);
+BST.insert(15);
+BST.insert(3);
+BST.insert(7);
+BST.insert(13);
+BST.insert(17);
+BST.insert(18);
+BST.insert(19);
+
+var root = BST.getRootNode();
+console.log(BST.findDistanceBetweenTwoNodes(root, 10, 19));
+
 
 Example: The distance between the nodes 4 and 10 is 4. The distance between the nodes 8 and 10 is 1. The distance between the nodes 1 and 14 is 4.
