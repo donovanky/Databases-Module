@@ -5,7 +5,7 @@ Q:What is a heuristic?
 A:A heuristic is a best guess. We use heuristics to solve complex prolems more quickly but increase the risk of our algorithm becoming less accurate. 
 
 Q:What is another problem besides the shortest-path problem that requires the use of heuristics?
-A: Another problem which uses heuristics could be the did you mean "xyz" that some search browsers employ. The algorithm tries to match it to a similar term (that )
+A: Another problem which uses heuristics could be the did you mean "xyz" that some search browsers employ. The algorithm tries to match it to a similar term.
 
 Q:What is the difference between a depth-first search and a breadth-first search?
 A:A depth first search works to the end of the tree and searches up from there whereas a breadth first search starts at the node and exhausts all child nodes at each level before moving down. 
@@ -66,8 +66,8 @@ class BinarySearchTree{
 		var distanceNode1ToRoot = this.countAncestors(lowestCommonAncestor, n1);
 		var distanceNode2ToRoot = this.countAncestors(lowestCommonAncestor, n2);
 		var distanceRootToAncestor = this.countAncestors(root, lowestCommonAncestor);
-		var totalDistance = (distanceNode1ToRoot + distanceNode2ToRoot) - (2 * distanceRootToAncestor);
-		return ('The distance between node ' + n1 + ' and node ' + n2 + ' is ' + totalDistance);
+        var total = this.addTotal(distanceNode1ToRoot, distanceNode2ToRoot);
+		return ('The distance between node ' + n1 + ' and node ' + n2 + ' is ' + total);
 	}
 
 findCommonAncestor(root, n1, n2) {
@@ -96,6 +96,11 @@ countAncestors(root, data) {
 			nodeCount++;
 		}
 	}
+  
+addTotal(n1, n2){
+    var total = (n1 + n2)
+    return total;
+}
 getRootNode(){
   return this.root;
 }
@@ -143,6 +148,8 @@ BST.insert(19);
 
 var root = BST.getRootNode();
 console.log(BST.findDistanceBetweenTwoNodes(root, 10, 19));
+console.log(BST.findDistanceBetweenTwoNodes(root, 10, 5));
+console.log(BST.findDistanceBetweenTwoNodes(root, 3, 7))
 
 
 Example: The distance between the nodes 4 and 10 is 4. The distance between the nodes 8 and 10 is 1. The distance between the nodes 1 and 14 is 4.
