@@ -1,0 +1,71 @@
+Using proper pseudo-code, describe the following primitive algorithms:
+
+Making coffee;
+
+If machinery or supplies ((coffeemaker, coffee, coffee accessories(filter, pot, mug), coffee additives(sugar, cream))) are missing:
+Locate machinery and supplies.
+Assemble machinery and supplies in single, power outlet convenient location.
+Else continue
+If coffeemaker not plugged in:
+	Plug in coffeemaker.
+Else:
+	Add water, filter, and coffee grinds to coffeemaker.
+	Locate coffee pot and insert into coffeemaker.
+	Turn on coffeemaker.
+Wait for coffeemaker to pour coffee into coffee pot. 
+When above step is complete, find coffee mug. 
+Remove coffee pot from coffeemaker and pour coffee into coffee mug.
+
+
+Washing dishes;
+If dishes are not dirty:
+	Resume daily activity.
+Else:
+	Place dishes in dishwasher.
+	Add soap to dishwasher.
+	Close dishwasher door.
+	Select time.
+	Select intensity.
+	Activate dishwashing mode.
+	Wait for time to complete.
+	Remove dishes and place in proper locations for future use.
+
+A choice of your own.
+
+Making ice;
+Locate ice tray
+If ice tray is dirty
+	Follow Washing dishes algorithm above.
+Else:
+	Bring ice tray to sink.
+	Fill ice tray with water.
+	Bring ice tray to freezer.
+If spillOccurred is true:
+	Locate towel.
+	Use towel to remove spill.
+	Restart.
+Else:
+	Open freezer
+	Insert ice tray into freezer.
+If water is level is true:
+	Reinsert ice tray into freezer until water level is true.
+Else: 
+	Close freezer.
+	Wait.
+
+
+
+
+As with the knot algorithm, there may be more than one way to solve the problem. It is essential to try to pick the best algorithm for a situation. 
+Name three companies who created an algorithm that made them successful, e.g., Google's search algorithm. 
+It doesn't need to be a tech example (such as a recipe or manufacturing a product). 
+Google's algorithm produces more relevant results than other search engines; what about each of your cases make them stand out?
+Ford's assembly line manufacturing process and delination of roles.
+Garmin's Point A to B mapping solution algorithm.
+McDonald's food standardization and assembly algorithm.
+
+
+Hypothesize about what constitutes an efficient algorithm versus an inefficient algorithm.
+Time complexity (and Big O Notation).
+Resource complexity (whether human or not).
+Comprehension complexity (does the person/machine/etc. understand what is supposed to be done).
