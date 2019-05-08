@@ -1,0 +1,70 @@
+Q:Define and compare recursion and iteration.
+
+A:Recursion -> Recursion is repeating the same process until it is complete. For programming, this means a procedure that calls itself. 
+Iteration -> Iteration is the process of solving problems with loops. This means we loop over an object liek a list for as many items are within that list. 
+
+Iteration and Recursion can often be used instead of the other but sometimes one will be far more suitable than the other. An iterative approach towards the Fibonacci sequence solution is more efficient than the recursive function, for instance.  
+
+
+Q:Name five algorithms that are commonly implemented by recursion.
+A:Searching + Sorting Algorithms, Binary Search, Merge Sort, Quick, Breadth First Search, Depth First Tree.
+
+Q:When should you use recursion, and when should you avoid recursion? Give examples for each.
+A: We should use recursion when algorithms result in subresults (when we know the start case). We should avoid recursion when it will be less efficient than its iterative counterpart, as seen in the fibonacci example. 
+
+Q:Compare the recursive and iterative solutions to the three algorithms from the checkpoint (factorial, maximum, and fibonacci). What is similar, and what is different?
+A: The similarity is that the results can be achieved through either method, whether iterative or recursive. 
+
+Factorial
+Recursion - Base case is established, it being if number is less than zero, which is something we also see in the iterative method.  This method seems more efficient than its iterative counterpart.
+Iteration - Loops are used, which since it is iterative, makes perfect sense. As it iteratives through this list, we use the variable result to track the calculations. Instead of multiply by factorial(number-1), result is initialized to 1 and iterates through the numbers within the variable number. 
+
+Maximum
+Recursion - Base case of if this is the last number, this is the biggest number. We use recursion to parse out the smaller numbers and get our base case to become true so that the largest number is returned. 
+Iteration - The iterative function looks cleaner than the recursive function. We create a function which assigns max to a number, then iterates through that list/array of numbers. When the number iterated upon is a larger value than what max is currently, it updates max to the new, larger number. 
+
+Fibonacci
+Recursion - For the Fibonacci recursive function, we end up needing to process multiple recursive calls within each step. Fibonacci is called with 2 less than curent number and is stored as a variable, twoBack. In a similar fashion, 1 less than number becomes oneBack.  Now we simply add the two varaibvles we created in our recursive function, oneBack and twoBack, which leads us to our outcome - the next step of the Fibonacci sequence. 
+Iteration -The iterative and recursive functions are similar since both must add the last two numbers to arrive at the next in the sequence. Where they differ is...........
+
+Q:Given a multi-dimensional collection (such as an array) where the number of dimensions is unknown, write a recursive algorithm to count the number of items in the entire collection.
+A: 
+var array = [[1,2,3],[4,5],[6,7,8], [1,2]];
+var array2 = [[1],[2],[3]]
+var count = 0;
+
+function countArray(arr){
+  if(!Array.isArray(arr)){
+    count++;
+  }else{
+    for(var i = 0; i < arr.length; i++){
+      countArray(arr[i]);
+    }
+  }
+  return count;
+}
+
+console.log(countArray(array));
+console.log(countArray(array2)); //how can I get count to not be global in a recursive function? Must count be global to make a recursive function work? 
+
+Q:A palindrome is a word or phrase whose spelling is the same either direction (e.g., racecar). Write a recursive algorithm to determine if a given word or phrase is a palindrome.
+A:
+
+function checkPalindrome(word){
+  if (word.length <= 1){
+    return true;
+  }
+  else if (word[0] === word[word.length-1]){
+      return checkPalindrome(word.slice(1, word.length-1));
+    }
+    return false;
+}
+
+
+
+console.log(checkPalindrome("apple"));
+console.log(checkPalindrome("racecar"));
+console.log(checkPalindrome("anana"));
+
+Q:Google Easter Egg: Google the term "recursion". Google will prompt you with "Did you mean: recursion". Explain why this behavior exhibits properties of recursion.
+A: The google easter egg exhibits recursion as a recursive function calls itself. When I search recursion on google, the search references itself (itself being recursion). 
