@@ -1,58 +1,53 @@
 Using proper pseudo-code, describe the following primitive algorithms:
 
 Making coffee;
+FUNCTION
+IF consumer wants coffee
+	ADD coffee beans to coffee machine
+	ADD water to coffee pot
+	ADD coffee pot to coffee machine
+	START coffee machine
+	WHILE coffee machine is running
+		WAIT
+	POUR coffee into coffee cup
+	IF consumer wants sugar 
+		WHILE desired_Sugar_Level is less than current sugar level
+			ADD sugar
+	IF consumer wants creamer
+		WHILE desired cream level is less than current cream level
+			ADD cream
+END
 
-If machinery or supplies ((coffeemaker, coffee, coffee accessories(filter, pot, mug), coffee additives(sugar, cream))) are missing:
-Locate machinery and supplies.
-Assemble machinery and supplies in single, power outlet convenient location.
-Else continue
-If coffeemaker not plugged in:
-	Plug in coffeemaker.
-Else:
-	Add water, filter, and coffee grinds to coffeemaker.
-	Locate coffee pot and insert into coffeemaker.
-	Turn on coffeemaker.
-Wait for coffeemaker to pour coffee into coffee pot. 
-When above step is complete, find coffee mug. 
-Remove coffee pot from coffeemaker and pour coffee into coffee mug.
 
-
-Washing dishes;
-If dishes are not dirty:
-	Resume daily activity.
-Else:
-	Place dishes in dishwasher.
-	Add soap to dishwasher.
-	Close dishwasher door.
-	Select time.
-	Select intensity.
-	Activate dishwashing mode.
-	Wait for time to complete.
-	Remove dishes and place in proper locations for future use.
+WASHING DISHES;
+FUNCTION
+CHECK dishes_Status
+	IF dishes status is dirty
+		PUT dishes in dishwasher
+		ADD soap to dishwasher
+		SEAL dishwasher door
+		START dishwasher 
+		WHILE dishwasher is running
+			WAIT
+		PUT away dishes
+	ELSE
+END
 
 A choice of your own.
 
-Making ice;
-Locate ice tray
-If ice tray is dirty
-	Follow Washing dishes algorithm above.
-Else:
-	Bring ice tray to sink.
-	Fill ice tray with water.
-	Bring ice tray to freezer.
-If spillOccurred is true:
-	Locate towel.
-	Use towel to remove spill.
-	Restart.
-Else:
-	Open freezer
-	Insert ice tray into freezer.
-If water is level is true:
-	Reinsert ice tray into freezer until water level is true.
-Else: 
-	Close freezer.
-	Wait.
+MAKING ICE;
+FUNCTION
+FIND ice tray
+PLACE ice tray over sink
+TURN on water
+WHILE ice tray filled percent is less than eighty percent
+	WAIT
+PUT water in ice tray
+PUT waterfilled ice tray in freezer
 
+CLOSE freezer
+WAIT
+END
 
 
 
