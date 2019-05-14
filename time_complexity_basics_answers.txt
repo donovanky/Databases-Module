@@ -55,7 +55,7 @@ FUNCTION fibonacci(number)
  END IF
 END FUNCTION
 
-A: Time complexity is O(1)
+A: Time complexity is O(n^2)(exponential)
 
 Out of the code snippets you just saw, which is the most time efficient?
-The most efficient is the last one, the fibonaci sequence with a time efficiency of O(1).
+The most efficient is the last one, the fibonaci sequence with a time efficiency of O(n) linear, as seen in the linearSearch function.
