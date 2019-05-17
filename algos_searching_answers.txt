@@ -1,0 +1,67 @@
+What is a real-life scenario that uses linear search?
+We could use a linear search to search for a specific email in out inbox, if we know who sent it for instance.
+What is a real-life scenario that uses binary search?
+We might use a binary search to search through a phone book or contact list if we know the last name of the person we wish to call. 
+
+Given the alphabetically sorted collection in this checkpoint, how many iterations would it take to find the value G using linear search?
+Our linear search function would iterate 7 times in order to find G.
+Given the alphabetically sorted collection in this checkpoint, how many iterations would it take to find the value G using binary search?
+Our binary search function would iterate 4 times in order to find G.
+Given an unsorted collection of a million items, which algorithm would you choose between linear search and binary search? Explain your reasoning.
+Given a sorted collection of a million items, which algorithm would you choose between linear search and binary search? Explain your reasoning.
+
+A: Unless I can force the collection to become sorted, I would have to use a linear search since a binary search will only function on a sorted collection. Since I am being provided an unsorted collection, a linear search is the only option. 
+Programming Assignment:
+You and a friend have set a wager to see who can find the word "Albatross" in the dictionary the fastest. Write a program to allow you to win the bet.
+```
+var sortedDict = ["Albatross", "BigFoot", "Cat", "Dog", "Emu", "Fox", "Goat"];
+
+function search(arr, word){
+  var low = arr[0];
+  var high = arr[arr.length -1];
+  
+  while (low <= high){
+    var mid = ((arr.indexOf(low) + arr.indexOf(high))/2); //indexOf provides the numeric value of the var
+    mid = Math.round(mid); //round mid in case of a decimal, in case of an odd number of items in our dictionary
+    
+    if (arr[mid] > word){
+      high = arr[mid-1];
+    }
+    
+    else if (arr[mid] < word){
+      low = arr[mid+1];
+
+    }
+    
+    else{
+      return arr[mid];
+    }
+    
+   
+  }
+  return (word+ " was not found in this collection.")
+}
+console.log(search(sortedDict, "Albatross"))
+console.log(search(sortedDict, "Cat"))
+console.log(search(sortedDict, "Llama"))
+```
+
+You work at a pet store, and a child has asked you to net the only white-spotted goldfish from the fish tank. Write a program that will help you net the right fish.
+
+```
+var aquariumOne = ['blueFish', 'redFish', 'goldFish', 'whiteSpottedFish'];
+
+function catchFish(arr, targetFish) {
+  for (var i = 0; i < arr.length; i++){
+    if (arr[i] === targetFish){
+      return ("You've caught " + targetFish + " from the tank");
+     
+    }
+  }
+  return ("That fish isn't in the tank");
+}
+
+console.log(catchFish(aquariumOne, 'whiteSpottedFish'));
+console.log(catchFish(aquariumOne, 'goldFish'));
+console.log(catchFish(aquariumOne, 'orangeFish'));
+```
