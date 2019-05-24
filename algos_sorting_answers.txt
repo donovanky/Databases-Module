@@ -1,0 +1,59 @@
+1. Implement a solution for bubble sort.
+
+```
+function bubbleSort(collection){
+ 
+  var swap;
+  var n = collection.length-1;
+  var x = collection;
+  do{
+    swap = false;
+    for (var i = 0; i < n; i++){
+      if (x[i] > x[i+1]){
+        var temp = x[i];
+        x[i] = x[i+1];
+        x[i+1] = temp;
+        swap = true;
+      }
+    }
+    n--;
+  }while (swap);
+  return x;
+}
+
+var testScores = [1,23,32,63,77,239,8,56,100,58];
+console.log(bubbleSort(testScores))
+```
+
+2. Write psuedocode for quicksort.
+
+FUNCTION quicksort(collection)
+	IF collection.length is less than one
+		RETURN collection
+	ELSE	
+		SET left to empty array
+		SET right to empty array
+		SET pivot to last item of collection
+		SET length to the length of the collection
+		
+		FOR i equal to zero and to length minus one
+			IF collection[i] is less than or equal to pivot
+				PUSH collection[i] to the last index of left
+			ELSE
+				PUSH collection[i] to the last index of right
+			END IF
+		END FOR
+		RETURN quicksort(left).concat(pivot, quicksort(right));
+       END IF
+END FUNCTION
+
+
+3. We talked about time complexity in a previous checkpoint, and how to get an idea of the efficiency of an algorithm. After looking at the pseudocode for the above sorting methods, identify why merge sort and quick sort are much more efficient than the others. Walking through each algorithm with a few sample collections may help.
+
+Merge sort doesn't need to iterate through what might be a large collection, which is what allows it to be more efficient than most of these other sorting functions. Merge sort sorts the collection into multiple subcollections and then merges them in order.
+
+Quick sort is a more memory efficient function as it does not need to compare items to one anotehr which makes it unique. 
+
+4. All of the sorts addressed in this checkpoint are known as comparison sorts. Research bucket sort and explain how it works. What is the ideal input for bucket sort?
+
+Bucket sort is also known as bin sort and it places elements in an array into multiple buckets based on if it fits into a range (for instance: 0-10, 11-20, etc). We can sort these buckets with other sorting algorithms or recursively apply our bucket sort. After we sort each item in an array into a range, we can sort each bucket in order. 
